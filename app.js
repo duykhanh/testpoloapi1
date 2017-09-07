@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/bower_components'));
-app.use('/',express.static('style.css'));
+app.use(express.static(__dirname));
 
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + '/index.html');
