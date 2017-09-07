@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "poloniex api test",
   "main": "index.js",
-  "scripts": {
-     "postinstall": "./node_modules/bower/bin/bower install",
+  "scripts": {    
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "bower install && grunt build"
   },
   "author": "",
   "license": "ISC",
