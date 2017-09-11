@@ -20,10 +20,7 @@ var connection = new autobahn.Connection({
     realm: "realm1"
 });
 
-var connection1 = new autobahn.Connection({
-    url: wscoincap,
-    realm: "realm1"
-});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -74,7 +71,7 @@ app.post('/tradeRemi', function (req, res) {
 				var $ = window.jQuery,
 					$body = $('body'),
 					$videos = $body.find('.sell-offer');
-				console.log($body);
+				//console.log($body);
 					//I know .video-entry elements contain the regular sized thumbnails
 				//for each one of the .video-entry elements found
 				$videos.each(function (i, item) {
@@ -114,15 +111,15 @@ io.on('connection', function (client) {
     console.log('Client connected...');
 
     client.on('join', function (data) {
-        console.log(data);
+        //console.log(data);
 
     });
     
     client.on('sendMessages', function (data) {
-        io.emit('broadcastMessages', data);
+        //io.emit('broadcastMessages', data);
     });
     client.on('tradeCoin',function(data){
-        io.emit('BTC_XMR',data);
+        //io.emit('BTC_XMR',data);
     });
 });
 
@@ -154,19 +151,7 @@ io.on('connection', function (client) {
 
     connection.open();
 	
-connection1.onopen = function (session) {
-	console.log("Websocket connection1 open");
-	function globalEvent(args, kwargs){
-		 console.log(args);
-	}
-	session.subscribe('global', globalEvent);
-};
 
- connection1.open();
- connection1.onclose = function (a,b) {
-        console.log(b);
-        console.log("Websocket1 connection closed");
-    }
 //bittrex
 bittrex.websockets.listen( function( data ) {
   if (data.M === 'updateSummaryState') {
