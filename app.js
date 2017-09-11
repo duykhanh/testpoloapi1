@@ -58,9 +58,7 @@ app.get('/tradeRemi', function (req, res) {
         uri: 'https://eth.remitano.com/vn'
     }, function (err, response, body) {
         var self = this;
-        self.items = new Array(); //I feel like I want to save my results in an array
-        
-		  //Just a basic error check
+        self.items = new Array(); 
         if (err && response.statusCode !== 200) {
             console.log('Request error.');
         }
