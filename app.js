@@ -66,6 +66,42 @@ app.post('/tradeRemi', function (req, res) {
             console.log('Request error.');
         }
         
+		jsdom.env({
+			html: body,
+			scripts: ['http://code.jquery.com/jquery-1.6.min.js'],
+			done: function (err, window) {				
+				//Use jQuery just as in any regular HTML page
+				var $ = window.jQuery,
+					$body = $('body'),
+					$videos = $body.find('.sell-offer');
+				console.log($body);
+					//I know .video-entry elements contain the regular sized thumbnails
+				//for each one of the .video-entry elements found
+				$videos.each(function (i, item) {
+				   
+						 //I will use regular jQuery selectors
+					var $a = $(item).children('a'),
+					   
+							  //first anchor element which is children of our .video-entry item
+						$title = $(item).find('span').text();
+						
+						
+				   
+						 //and add all that data to my items array
+					self.items[i] = {                    
+						title: $title.trim(),                   
+						
+					};
+				});
+				
+					//let's see what we've got
+				console.log(self.items);
+				res.end('Done');
+				
+				//res.send(self);
+			}
+		});
+		
 		  //Send the body param as the HTML code we will parse in jsdom
         //also tell jsdom to attach jQuery in the scripts
         jsdom.env({
