@@ -13,7 +13,8 @@ var wsuri = "wss://api.poloniex.com";
 var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 var jsdom = require("node-jsdom");
-var self = this;
+var request = require('request');
+
 var connection = new autobahn.Connection({
     url: wsuri,
     realm: "realm1"
@@ -51,14 +52,16 @@ app.post('/tradeOB',function(req,res,next) {
           res.json(e);
     });
 });
-
+var self = this;
 app.get('/tradeRemi', function (req, res) {
     //Tell the request that we want to fetch youtube.com, send the results to a callback function
     request({
         uri: 'https://eth.remitano.com/vn'
     }, function (err, response, body) {
-       
-        self.items = new Array(); 
+        
+        self.items = new Array(); //I feel like I want to save my results in an array
+        
+		  //Just a basic error check
         if (err && response.statusCode !== 200) {
             console.log('Request error.');
         }
@@ -86,12 +89,10 @@ app.get('/tradeRemi', function (req, res) {
                     
 					
                
-					 //and add all that data to my items array
-               
+				
             });
             
-				//let's see what we've got
-            console.log(self.items);
+			           
             res.end('Done');
         });
     });
