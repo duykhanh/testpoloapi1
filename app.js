@@ -13,7 +13,7 @@ var wsuri = "wss://api.poloniex.com";
 var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 var jsdom = require("node-jsdom");
-
+var self = this;
 var connection = new autobahn.Connection({
     url: wsuri,
     realm: "realm1"
@@ -57,7 +57,7 @@ app.get('/tradeRemi', function (req, res) {
     request({
         uri: 'https://eth.remitano.com/vn'
     }, function (err, response, body) {
-        var self = this;
+       
         self.items = new Array(); 
         if (err && response.statusCode !== 200) {
             console.log('Request error.');
