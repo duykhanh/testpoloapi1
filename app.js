@@ -12,7 +12,7 @@ var autobahn = require('autobahn');
 var wsuri = "wss://api.poloniex.com";
 var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
-var jsdom = require("node-jsdom");
+const  jsdom = require("node-jsdom");
 var request = require('request');
 
 var connection = new autobahn.Connection({
@@ -65,7 +65,7 @@ app.post('/tradeRemi', function (req, res) {
         if (err && response.statusCode !== 200) {
             console.log('Request error.');
         }
-        
+        console.log(body);
 		jsdom.env({
 			html: body,
 			scripts: ['http://code.jquery.com/jquery-1.6.min.js'],
@@ -102,40 +102,7 @@ app.post('/tradeRemi', function (req, res) {
 			}
 		});
 		
-		  //Send the body param as the HTML code we will parse in jsdom
-        //also tell jsdom to attach jQuery in the scripts
-        jsdom.env({
-            html: body,
-            scripts: ['http://code.jquery.com/jquery-1.6.min.js']
-        }, function (err, window) {
-            //Use jQuery just as in any regular HTML page
-            var $ = window.jQuery,
-                $body = $('body'),
-                $videos = $body.find('.sell-offer');
-            console.log($body);
-				//I know .video-entry elements contain the regular sized thumbnails
-            //for each one of the .video-entry elements found
-            $videos.each(function (i, item) {
-               
-					 //I will use regular jQuery selectors
-                var $a = $(item).children('a'),
-                   
-						  //first anchor element which is children of our .video-entry item
-                    $title = $(item).find('span').text();
-                    
-					
-               
-					 //and add all that data to my items array
-                self.items[i] = {                    
-                    title: $title.trim(),                   
-                    
-                };
-            });
-            
-				//let's see what we've got
-            console.log(self.items);
-            res.end('Done');
-        });
+		
     });
 });
 
