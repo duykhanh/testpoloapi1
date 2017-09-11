@@ -53,7 +53,7 @@ app.post('/tradeOB',function(req,res,next) {
     });
 });
 
-app.get('/tradeRemi', function (req, res) {
+app.post('/tradeRemi', function (req, res) {
     //Tell the request that we want to fetch youtube.com, send the results to a callback function
     request({
         uri: 'https://eth.remitano.com/vn'
