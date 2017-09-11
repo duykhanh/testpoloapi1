@@ -87,10 +87,7 @@ app.get('/tradeRemi', function (req, res) {
 					
                
 					 //and add all that data to my items array
-                self.items[i] = {                    
-                    title: $title.trim(),                   
-                    
-                };
+               
             });
             
 				//let's see what we've got
