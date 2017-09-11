@@ -16,6 +16,19 @@
 $( document ).ready(function() {
     $('#fettchRemi').on('click', function(e){
     	console.log("khanh nguyen");
-    })	
+		$.ajax({
+					    url: "/tradeRemi",
+					    type: "POST",
+					    dataType: "json",
+			  			contentType: "application/json", 					    
+					    success: function (response) {
+					    	console.log(response);
+					    },
+				        error: function(error) {
+				            console.log("some error in fetching the notifications");
+			    }
+			});
+	})	
+})	
 })
 </script>  
