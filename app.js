@@ -52,13 +52,13 @@ app.post('/tradeOB',function(req,res,next) {
           res.json(e);
     });
 });
-var self = this;
+
 app.get('/tradeRemi', function (req, res) {
     //Tell the request that we want to fetch youtube.com, send the results to a callback function
     request({
         uri: 'https://eth.remitano.com/vn'
     }, function (err, response, body) {
-        
+        var self = this;
         self.items = new Array(); //I feel like I want to save my results in an array
         
 		  //Just a basic error check
@@ -85,14 +85,19 @@ app.get('/tradeRemi', function (req, res) {
                 var $a = $(item).children('a'),
                    
 						  //first anchor element which is children of our .video-entry item
-                    $title = $(item).find('span').text(),
+                    $title = $(item).find('span').text();
                     
 					
                
-				
+					 //and add all that data to my items array
+                self.items[i] = {                    
+                    title: $title.trim(),                   
+                    
+                };
             });
             
-			           
+				//let's see what we've got
+            console.log(self.items);
             res.end('Done');
         });
     });
