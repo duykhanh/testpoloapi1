@@ -58,11 +58,11 @@ var test="KHanh";
 
 app.post('/tradeRemi', function (req, res) {
 	
- 	x('https://eth.remitano.com/vn', '.main-container')(function(err, str) {
+ 	x('https://eth.remitano.com/vn', '#body_content')(function(err, str) {
 	  if (err){
 	  	console.log("Got an error: ", err);	
 	  } 
-	 
+	 console.log("KHanh ", str);	
           console.log("Got an error: ", str);	
 	  test=str;		
 	  
