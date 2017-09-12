@@ -54,11 +54,11 @@ app.post('/tradeOB',function(req,res,next) {
           res.json(e);
     });
 });
-var test="KHanh";
+var test="retretgre";
 
 app.post('/tradeRemi', function (req, res) {
 	
- 	x('https://eth.remitano.com/vn', 'div.main-container')(function(err, str) {
+ 	x('https://eth.remitano.com/vn', 'div.price-content')(function(err, str) {
 	  if (err){
 	  	console.log("Got an error: ", err);	
 	  } 
