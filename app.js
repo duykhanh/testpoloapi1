@@ -58,7 +58,7 @@ var test="KHanh";
 
 app.post('/tradeRemi', function (req, res) {
 	
- 	x('https://eth.remitano.com/vn', '#body_content')(function(err, str) {
+ 	x('https://eth.remitano.com/vn', 'div.main-container')(function(err, str) {
 	  if (err){
 	  	console.log("Got an error: ", err);	
 	  } 
