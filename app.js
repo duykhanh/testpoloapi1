@@ -62,7 +62,7 @@ app.post('/tradeRemi', function (req, res) {
 	  if (err){
 	  	console.log("Got an error: ", err);	
 	  } 
-	  assert.equal('Google', str);
+	 
           console.log("Got an error: ", str);	
 	  test=str;		
 	  
