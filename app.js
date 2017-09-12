@@ -54,16 +54,17 @@ app.post('/tradeOB',function(req,res,next) {
           res.json(e);
     });
 });
-
+var test="KHanh";
 app.post('/tradeRemi', function (req, res) {
 	
  	x('http://google.com', 'title')(function(err, str) {
 	  if (err) return done(err);
 	  assert.equal('Google', str);
           console.log("Got an error: ", str);	
-	  res.json(str);		
+	  test=str;		
 	  done();
-	})
+	});
+	console.log("Got an error: ", test);	
 	/*new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
 	 
 		//This will return undefined! The scraping was unsuccessful!
