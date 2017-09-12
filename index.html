@@ -20,7 +20,8 @@ $( document ).ready(function() {
 					    url: "/tradeRemi",
 					    type: "POST",
 					    dataType: "json",
-			  			contentType: "application/json", 					    
+			  		    contentType: "application/json", 					    
+					    async: false,
 					    success: function (response) {
 					    	console.log(response);
 					    },
