@@ -18,7 +18,7 @@ var phantom = require('x-ray-phantom');
 var Xray = require('x-ray');
 
 var x = Xray()
-  .driver(phantom());
+  .driver(phantom({webSecurity:false}));
 
 var connection = new autobahn.Connection({
     url: wsuri,
