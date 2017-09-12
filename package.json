@@ -22,7 +22,7 @@
     "node.bittrex.api": "^0.3.0",
     "node-jsdom":"^3.1.5",
     "request":"^2.81.0",
-    "phantom":"^4.0.5",
-    "yql":"^1.0.2"
+    
+    "x-ray-phantom":"^1.0.1"
   }
 }
