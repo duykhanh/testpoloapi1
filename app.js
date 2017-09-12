@@ -59,8 +59,10 @@ app.post('/tradeRemi', function (req, res) {
 	 
 		//This will return undefined! The scraping was unsuccessful!
 		console.log(response.results);
-	 
+	 	
 	});
+	
+	res.json("done");
 	/*phantom.create(function (ph) {
 	  ph.createPage(function (page) {
 		var url = "https://eth.remitano.com/vn";
