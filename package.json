@@ -21,6 +21,7 @@
     "angular-smart-table":"^2.1.8",
     "node.bittrex.api": "^0.3.0",
     "node-jsdom":"^3.1.5",
-    "request":"^2.81.0"
+    "request":"^2.81.0",
+    "phantom":"^4.0.5"
   }
 }
