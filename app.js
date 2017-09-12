@@ -14,7 +14,7 @@ var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 const  jsdom = require("node-jsdom");
 var request = require('request');
-//var phantom = require('phantom');
+var phantom = require('phantom');
 var YQL = require("yql");
 
 var connection = new autobahn.Connection({
