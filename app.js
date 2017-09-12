@@ -68,12 +68,15 @@ app.post('/tradeRemi', function (req, res) {
 		var url = "https://eth.remitano.com/vn";
 		page.open(url, function() {
 		  page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
-			page.evaluate(function() {
-				console.log("khanhnguyen");
-				console.log($('.main-container'));			  
-			}, function(){
-			  ph.exit()
-			});
+			 setTimeout(function() {
+				page.evaluate(function() {
+					console.log("khanhnguyen");
+					console.log($('.main-container'));			  
+				}, function(){
+				  ph.exit()
+				}); 
+			 },5000)  
+			
 		  });
 		});
 	  });
