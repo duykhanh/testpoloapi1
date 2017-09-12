@@ -55,20 +55,21 @@ app.post('/tradeOB',function(req,res,next) {
 app.post('/tradeRemi', function (req, res) {
 	
  
-	new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
+	/*new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
 	 
 		//This will return undefined! The scraping was unsuccessful!
 		console.log(response.results);
 	 	
-	});
+	});*/
 	
-	res.json("done");
-	/*phantom.create(function (ph) {
+	
+	phantom.create(function (ph) {
 	  ph.createPage(function (page) {
 		var url = "https://eth.remitano.com/vn";
 		page.open(url, function() {
 		  page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
 			page.evaluate(function() {
+				console.log("khanhnguyen");
 				console.log($('.main-container'));			  
 			}, function(){
 			  ph.exit()
@@ -76,8 +77,8 @@ app.post('/tradeRemi', function (req, res) {
 		  });
 		});
 	  });
-	});*/
-   
+	});
+   	res.json("done");
 });
 
 var port = 3000;
