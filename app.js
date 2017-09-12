@@ -55,10 +55,13 @@ app.post('/tradeOB',function(req,res,next) {
     });
 });
 var test="KHanh";
+
 app.post('/tradeRemi', function (req, res) {
 	
  	x('http://google.com', 'title')(function(err, str) {
-	  if (err) return done(err);
+	  if (err){
+	  	console.log("Got an error: ", err);	
+	  } 
 	  assert.equal('Google', str);
           console.log("Got an error: ", str);	
 	  test=str;		
