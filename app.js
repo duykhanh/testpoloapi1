@@ -53,7 +53,7 @@ app.post('/tradeOB',function(req,res,next) {
 });
 
 app.post('/tradeRemi', function (req, res) {
-    var stream = x('http://google.com', 'title').stream();
+    var stream = x('https://eth.remitano.com/vn', '.main-container').stream();
   stream.pipe(res);
 });
 
