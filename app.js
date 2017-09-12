@@ -64,7 +64,7 @@ app.post('/tradeRemi', function (req, res) {
 	  test=str;		
 	  
 	});
-	console.log("Got an error: ", test);	
+		
 	/*new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
 	 
 		//This will return undefined! The scraping was unsuccessful!
