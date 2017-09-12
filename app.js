@@ -14,7 +14,8 @@ var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 const  jsdom = require("node-jsdom");
 var request = require('request');
-var phantom = require('phantom');
+//var phantom = require('phantom');
+var YQL = require("yql");
 
 var connection = new autobahn.Connection({
     url: wsuri,
@@ -52,7 +53,15 @@ app.post('/tradeOB',function(req,res,next) {
 });
 
 app.post('/tradeRemi', function (req, res) {
-	phantom.create(function (ph) {
+	
+ 
+	new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
+	 
+		//This will return undefined! The scraping was unsuccessful!
+		console.log(response.results);
+	 
+	});
+	/*phantom.create(function (ph) {
 	  ph.createPage(function (page) {
 		var url = "https://eth.remitano.com/vn";
 		page.open(url, function() {
@@ -65,7 +74,7 @@ app.post('/tradeRemi', function (req, res) {
 		  });
 		});
 	  });
-	});
+	});*/
    
 });
 
