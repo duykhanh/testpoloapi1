@@ -14,8 +14,11 @@ var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 const  jsdom = require("node-jsdom");
 var request = require('request');
-var phantom = require('phantom');
-var YQL = require("yql");
+var phantom = require('x-ray-phantom');
+var Xray = require('x-ray');
+
+var x = Xray()
+  .driver(phantom());
 
 var connection = new autobahn.Connection({
     url: wsuri,
@@ -54,7 +57,13 @@ app.post('/tradeOB',function(req,res,next) {
 
 app.post('/tradeRemi', function (req, res) {
 	
- 
+ 	x('http://google.com', 'title')(function(err, str) {
+	  if (err) return done(err);
+	  assert.equal('Google', str);
+          console.log("Got an error: ", str);	
+	  res.json(str);		
+	  done();
+	})
 	/*new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
 	 
 		//This will return undefined! The scraping was unsuccessful!
@@ -63,24 +72,7 @@ app.post('/tradeRemi', function (req, res) {
 	});*/
 	
 	
-	phantom.create(function (ph) {
-	  ph.createPage(function (page) {
-		var url = "https://eth.remitano.com/vn";
-		page.open(url, function() {
-		  page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
-			 setTimeout(function() {
-				page.evaluate(function() {
-					console.log("khanhnguyen");
-					console.log($('.main-container'));			  
-				}, function(){
-				  ph.exit()
-				}); 
-			 },5000)  
-			
-		  });
-		});
-	  });
-	});
+	
    	res.json("done");
 });
 
