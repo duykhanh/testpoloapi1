@@ -14,8 +14,7 @@ var bodyParser = require("body-parser");
 var wscoincap='wss://coincap.io/socket.io';
 const  jsdom = require("node-jsdom");
 var request = require('request');
-var Xray = require('x-ray');
-var x = Xray();
+var phantom = require('phantom');
 
 var connection = new autobahn.Connection({
     url: wsuri,
@@ -53,8 +52,21 @@ app.post('/tradeOB',function(req,res,next) {
 });
 
 app.post('/tradeRemi', function (req, res) {
-    var stream = x('https://eth.remitano.com/vn', '.main-container').stream();
-  stream.pipe(res);
+	phantom.create(function (ph) {
+	  ph.createPage(function (page) {
+		var url = "https://eth.remitano.com/vn";
+		page.open(url, function() {
+		  page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
+			page.evaluate(function() {
+				console.log($('.main-container'));			  
+			}, function(){
+			  ph.exit()
+			});
+		  });
+		});
+	  });
+	});
+   
 });
 
 var port = 3000;
