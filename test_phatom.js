@@ -15,17 +15,7 @@ app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname));
 
 app.get('/', function (req, res, next) {
-    phantom.create().then(function(ph) {
-      ph.createPage().then(function(page) {
-        page.injectJs('./jQuery.min.js', function() {
-          page.property('content').then(function(content) {
-            console.log(content);
-            page.close();
-            ph.exit();
-          });
-        });
-      });
-    });
+    
     res.sendFile(__dirname + '/index.html');
 });
     
