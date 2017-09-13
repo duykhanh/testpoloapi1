@@ -1,6 +1,7 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var express = require('express');
 var server = require('http').createServer(app);
+var bodyParser = require("body-parser");
 var app = express();
 var port = 3000;
 
