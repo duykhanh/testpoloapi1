@@ -24,6 +24,7 @@
     "request":"^2.81.0",
      "x-ray":"^2.3.2",
     "x-ray-phantom":"^1.0.1",
-    "phantom":"^4.0.5"
+    "phantom":"^4.0.5",
+    "crawler":"^1.1.0"
   }
 }
