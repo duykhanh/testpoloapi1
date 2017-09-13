@@ -1,40 +1,59 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-var express = require('express');
-var server = require('http').createServer(app);
-var bodyParser = require("body-parser");
-var app = express();
-var port = 3000;
+var http = require("http");
+var phantom = require("phantom");
 
-server.listen(process.env.PORT || port);
-var phantom = require('phantom');
+var url = "http://en.wikipedia.org/wiki/London";
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+var server = http.createServer(function(req, res) {
 
-app.use(express.static(__dirname + '/bower_components'));
-app.use(express.static(__dirname));
+phantom.create(function (ph) {
+ph.createPage(function (page) {
+page.open(url, function (status) {
 
+// We use jQuery to parse the document
+page.includeJs(
+  "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js",
+  function() {
+    page.evaluate(function() {
 
-var Crawler = require("crawler");
+      var data = {};
 
-var c = new Crawler({
-    maxConnections : 10,
-    // This will be called for each crawled page
-    callback : function (error, res, done) {
-        if(error){
-            console.log(error);
-        }else{
-            var $ = res.$;
-            // $ is Cheerio by default
-            //a lean implementation of core jQuery designed specifically for the server
-            console.log($("title").text());
+      $("table.geography tr").each(function(tr_index, tr) {
+        var th_text = $(this).find("th").text();
+        var prop_name
+          = th_text.trim().toLowerCase().replace(/[^a-z]/g,"");
+
+        // We're only interested in these 3 fields
+        if({"country":1,"mayor":1,"elevation":1}[prop_name]) {
+          data[prop_name] = $(this).find("td").text();
         }
-        //done();
-    }
+      });
+
+      return data;
+
+    }, function(data) {
+
+      ph.exit();
+
+      // Begin writing our output HTML
+      res.writeHead(200, {"Content-Type": "text/html"});
+      res.write("<html><head><meta charset='UTF-8' />");
+      res.write("</head><body><table>");
+
+      for(var prop in data) {
+        res.write("<tr><th>" + prop + "</th><td>");
+        res.write(data[prop]);
+        res.write("</td></tr>");
+      }
+
+      res.end("</table></body></html>");
+
+      process.exit(0);
+    });
+  }
+);
+
 });
-c.queue('https://eth.remitano.com/vn');
-app.get('/', function (req, res, next) {
-    
-    res.sendFile(__dirname + '/index.html');
 });
-    
+});
+
+}).listen(8080);
