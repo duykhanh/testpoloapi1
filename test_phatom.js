@@ -7,6 +7,13 @@ var port = 3000;
 server.listen(process.env.PORT || port);
 var phantom = require('phantom');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname));
+
+app.get('/', function (req, res, next) {
     phantom.create().then(function(ph) {
       ph.createPage().then(function(page) {
         page.injectJs('./jQuery.min.js', function() {
@@ -18,3 +25,6 @@ var phantom = require('phantom');
         });
       });
     });
+    res.sendFile(__dirname + '/index.html');
+});
+    
