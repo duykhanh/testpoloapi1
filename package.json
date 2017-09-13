@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {    
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "node test_phatom.js",
     "postinstall": "bower install"
   },
   "author": "",
@@ -23,6 +23,7 @@
     "node-jsdom":"^3.1.5",
     "request":"^2.81.0",
      "x-ray":"^2.3.2",
-    "x-ray-phantom":"^1.0.1"
+    "x-ray-phantom":"^1.0.1",
+    "phantom":"^4.0.5"
   }
 }
