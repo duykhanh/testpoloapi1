@@ -69,13 +69,11 @@ var fs = require("fs");
 // 3rd party modules.
 var Browser = require("zombie");
 
-getGridData("http://senchacon.com/session-schedule.php", function (data) {
+getGridData("http://docbao.vn/", function (data) {
     // Wrap the `data` array in an object.
     data = {"sessions": data};
     // Let's make the JSON data pretty.
     var jsonStr = JSON.stringify(data, null, "  ");
-	console.log("Herrrrrrre --------------------------------------");
-	console.log(jsonStr);
     // Write the JSON data to the file system.
     fs.writeFile("schedule.json", jsonStr);
 });
@@ -118,33 +116,8 @@ function getGridData(url, callback) {
 
         // Loop through each of the `fancybox` nodes from the DOM and get the
         // session id, title, description, speaker, and location.
-        var nodes = browser.queryAll("a.fancybox").map(function (node) {
-            var id = ("#" + node.href.split("#")[1]);
-            var title = browser.text(node);
-            var sessionDOM = browser.query(id);
-            // Find all the "p" tags in the specified session DOM element.
-            var pTags = browser.queryAll("p", sessionDOM);
-            var description = getDescription(pTags[1]);
-            var speaker = "";
-            var location = "";
-
-            switch (pTags.length) {
-                case 3:
-                    speaker = getSpeaker(pTags[2]);
-                    break;
-                case 4:
-                    speaker = getSpeaker(pTags[2]);
-                    location = getLocation(pTags[3]);
-                    break;
-            }
-
-            return {
-                "id": id,
-                "title": title,
-                "description": description,
-                "speaker": speaker,
-                "location": location
-            };
+        var nodes = browser.queryAll("ul.news_lst").map(function (node) {
+            return node;
         });
 
         callback(nodes);
