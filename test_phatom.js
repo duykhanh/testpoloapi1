@@ -71,11 +71,12 @@ var Browser = require("zombie");
 
 getGridData("http://docbao.vn/", function (data) {
     // Wrap the `data` array in an object.
-    data = {"sessions": data};
+    //data = {"sessions": data};
     // Let's make the JSON data pretty.
-    var jsonStr = JSON.stringify(data, null, "  ");
+   // var jsonStr = JSON.stringify(data, null, "  ");
     // Write the JSON data to the file system.
-    fs.writeFile("schedule.json", jsonStr);
+    //fs.writeFile("schedule.json", jsonStr);
+	console.log(data);
 });
 
 
@@ -124,5 +125,3 @@ function getGridData(url, callback) {
     });
 }
 
-
- 
