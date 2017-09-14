@@ -117,11 +117,9 @@ function getGridData(url, callback) {
 
         // Loop through each of the `fancybox` nodes from the DOM and get the
         // session id, title, description, speaker, and location.
-        var nodes = browser.queryAll("ul.news_lst").map(function (node) {
-            return node;
-        });
+       var htmlString = browser.html();
 
-        callback(nodes);
+        callback(htmlString);
     });
 }
 
