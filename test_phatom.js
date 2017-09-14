@@ -74,6 +74,8 @@ getGridData("http://senchacon.com/session-schedule.php", function (data) {
     data = {"sessions": data};
     // Let's make the JSON data pretty.
     var jsonStr = JSON.stringify(data, null, "  ");
+	console.log("Herrrrrrre --------------------------------------");
+	console.log(jsonStr);
     // Write the JSON data to the file system.
     fs.writeFile("schedule.json", jsonStr);
 });
