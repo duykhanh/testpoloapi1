@@ -68,7 +68,7 @@ var fs = require("fs");
 
 // 3rd party modules.
 var Browser = require("zombie");
-
+const browser1 = new Browser({waitDuration: 29*1000});
 getGridData("http://docbao.vn/", function (data) {
     // Wrap the `data` array in an object.
     //data = {"sessions": data};
@@ -88,7 +88,7 @@ getGridData("http://docbao.vn/", function (data) {
  * @param {Object} callback.data The sessions array.
  */
 function getGridData(url, callback) {
-    Browser.visit(url, function (e, browser) {
+    browser1.visit(url, function (e, browser) {
         // Extract the text from the specified DOM object and strip out the specified prefix.
         var extractNode = function (obj, label) {
             var re = new RegExp("^" + label, "i");
