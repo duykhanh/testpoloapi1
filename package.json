@@ -25,6 +25,7 @@
      "x-ray":"^2.3.2",
     "x-ray-phantom":"^1.0.1",
     "phantom":"^4.0.5",
-    "zombie":"^5.0.7"
+    "zombie":"^5.0.7",
+    "node-horseman":"^3.3.0"
   }
 }
