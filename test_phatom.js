@@ -81,7 +81,7 @@ const config = {
     // no support from SlimerJS proxy: null,
     // no support from SlimerJS proxyType: null,
     // no support from SlimerJS proxyAuth: null,
-    phantomPath: '/usr/local/Cellar/slimerjs/0.10.0/bin/slimerjs',
+    //phantomPath: '/usr/local/Cellar/slimerjs/0.10.0/bin/slimerjs',
     debugPort: null,
     debugAutorun: true,
   },
