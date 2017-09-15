@@ -10,7 +10,7 @@ app.use(express.static(__dirname));
 var port = process.env.PORT || 14000;
 var By = webdriver.By;
 
-app.get('/tradeRemi', function (req, res) {
+app.post('/tradeRemi', function (req, res) {
     var driver = new webdriver.Builder()
         .forBrowser('phantomjs')
         .build();
