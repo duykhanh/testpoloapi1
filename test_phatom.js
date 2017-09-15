@@ -1,104 +1,39 @@
-// app.js
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+var webdriver = require('selenium-webdriver');
+var express = require('express')
+var app = express()
 
-var express = require('express');
-var app = express();
-var http = require('http');
-var https = require('https');
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var bittrex = require('node.bittrex.api');
-var autobahn = require('autobahn');
-var wsuri = "wss://api.poloniex.com";
-var bodyParser = require("body-parser");
-var wscoincap='wss://coincap.io/socket.io';
-var request = require('request');
+var port = process.env.PORT || 14000;
+var By = webdriver.By;
 
-
-var connection = new autobahn.Connection({
-    url: wsuri,
-    realm: "realm1"
+app.get('/tradeRemi', function (req, res) {
+    var driver = new webdriver.Builder()
+        .forBrowser('phantomjs')
+        .build();
+    driver.get('http://www.google.com/ncr');
+    driver.findElement(By.name('q')).sendKeys('webdriver');
+    driver.findElement(By.name('btnG')).click();
+    driver.wait(function() {
+        return driver.getTitle().then(function(title) {
+            console.log(title);
+            return title === 'webdriver - Google Search';
+        });
+    }, 5000).then(function() {
+        res.status(200).send('Done');
+    }, function(error) {
+        res.status(200).send(error);
+    });
+    driver.quit();
 });
 
-
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use(express.static(__dirname + '/bower_components'));
-app.use(express.static(__dirname));
+app.listen(port, function () {
+    console.log('Example app listening on port: ',port)
+})
 
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + '/index.html');
 });
 
 
-/*app.post('/tradeRemi', function (req, res) {
-	
- 
-	
-	
-	
-	phantom.create(function (ph) {
-	  ph.createPage(function (page) {
-		var url = "https://eth.remitano.com/vn";
-		page.open(url, function() {
-		  page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
-			 setTimeout(function() {
-				page.evaluate(function() {
-					console.log("khanhnguyen");
-					console.log($('.main-container'));			  
-				}, function(){
-				  ph.exit()
-				}); 
-			 },5000)  
-			
-		  });
-		});
-	  });
-	});
-   	res.json("done");
-});*/
 
-var port = 3000;
-
-server.listen(process.env.PORT || port);
-var Horseman = require('node-horseman');
-const config = {
-  browser: {
-    clientScripts: [],
-    timeout: 5000,
-    interval: 50,
-    loadImages: true,
-    switchToNewTab: false,
-    // no support from SlimerJS cookiesFile: null,
-    // no support from SlimerJS ignoreSSLErrors: false,
-    sslProtocol: 'any',
-    // no support from SlimerJS webSecurity: true,
-    injectJquery: true,
-    injectBluebird: false,
-    bluebirdDebug: false,
-    // no support from SlimerJS proxy: null,
-    // no support from SlimerJS proxyType: null,
-    // no support from SlimerJS proxyAuth: null,
-    //phantomPath: '/usr/local/Cellar/slimerjs/0.10.0/bin/slimerjs',
-    debugPort: null,
-    debugAutorun: true,
-	 ignoreSSLErrors: true
-  },
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.4.10 (KHTML, like Gecko) Version/8.0.4 Safari/600.4.10',
-}
-const horseman = new Horseman(config.browser);
-
-horseman
-  .userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0')
-  .open('http://www.google.com')
-  .type('input[name="q"]', 'github')
-  .click('[name="btnK"]')
-  .keyboardEvent('keypress', 16777221)
-  .wait(5000)
-  .count('div.g')
-  .log() // prints out the number of results
-  .close();
 
 
