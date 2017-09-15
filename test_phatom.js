@@ -1,6 +1,9 @@
 var webdriver = require('selenium-webdriver');
-var express = require('express')
-var app = express()
+var express = require('express');
+var http = require('http');
+var https = require('https');
+var app = express();
+
 app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname));
 
