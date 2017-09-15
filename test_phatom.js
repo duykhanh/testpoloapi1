@@ -64,62 +64,17 @@ var port = 3000;
 
 server.listen(process.env.PORT || port);
 
-var fs = require("fs");
+var Horseman = require('node-horseman');
+var horseman = new Horseman();
 
-// 3rd party modules.
-var Browser = require("zombie");
-const browser1 = new Browser({waitDuration: 29*1000});
-getGridData("http://docbao.vn/", function (data) {
-    // Wrap the `data` array in an object.
-    //data = {"sessions": data};
-    // Let's make the JSON data pretty.
-   // var jsonStr = JSON.stringify(data, null, "  ");
-    // Write the JSON data to the file system.
-    //fs.writeFile("schedule.json", jsonStr);
-	console.log(data);
-});
-
-
-/**
- * Extracts the speaker information from the specified page.
- *
- * @param {String} url The URL of the SenchaCon 2013 speakers page.
- * @param {Function} callback The function to call when the data is loaded and parsed.
- * @param {Object} callback.data The sessions array.
- */
-function getGridData(url, callback) {
-    browser1.visit(url, function (e, browser) {
-        // Extract the text from the specified DOM object and strip out the specified prefix.
-        var extractNode = function (obj, label) {
-            var re = new RegExp("^" + label, "i");
-            return browser.text(obj).replace(re, "").trim();
-        };
-
-        // Extracts the session title info from the DOM.
-        var getTitle = function (obj) {
-            return extractNode(obj, "Session Title:");
-        };
-
-        // Extracts the session description info from the DOM.
-        var getDescription = function (obj) {
-            return extractNode(obj, "Description:");
-        };
-
-        // Extracts the session speaker info from the DOM.
-        var getSpeaker = function (obj) {
-            return extractNode(obj, "Speaker:");
-        };
-
-        // Extracts the session room/location info from the DOM.
-        var getLocation = function (obj) {
-            return extractNode(obj, "Location:");
-        };
-
-        // Loop through each of the `fancybox` nodes from the DOM and get the
-        // session id, title, description, speaker, and location.
-       var htmlString = browser.html();
-
-        callback(htmlString);
-    });
-}
+horseman
+  .userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0')
+  .open('http://www.google.com')
+  .type('input[name="q"]', 'github')
+  .click('[name="btnK"]')
+  .keyboardEvent('keypress', 16777221)
+  .waitForSelector('div.g')
+  .count('div.g')
+  .log() // prints out the number of results
+  .close();
 
