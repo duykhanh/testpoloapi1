@@ -96,7 +96,7 @@ horseman
   .type('input[name="q"]', 'github')
   .click('[name="btnK"]')
   .keyboardEvent('keypress', 16777221)
-  .waitForSelector('div.g')
+  .wait(5000)
   .count('div.g')
   .log() // prints out the number of results
   .close();
