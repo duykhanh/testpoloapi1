@@ -15,9 +15,9 @@ var By = webdriver.By;
 app.post('/tradeRemi', function (req, res) {
     afterLoad('https://remitano.com/vn',function(html){
         var pos = html.lastIndexOf("VND");
-        var res = html.substring( pos-100,100);
-        console.log(res);
-         res.json(res);
+        var res1 = html.substring( pos-100,100);
+        console.log(res1);
+         res.json(res1);
     });
    
     /*var driver = new webdriver.Builder()
