@@ -1,5 +1,7 @@
 var webdriver = require('selenium-webdriver');
 var express = require('express');
+var afterLoad = require("after-load");
+
 var http = require('http');
 var https = require('https');
 var app = express();
@@ -11,7 +13,12 @@ var port = process.env.PORT || 14000;
 var By = webdriver.By;
 
 app.post('/tradeRemi', function (req, res) {
-    var driver = new webdriver.Builder()
+    afterLoad('https://google.com',function(html){
+     console.log(html);
+         res.json(html);
+    });
+   
+    /*var driver = new webdriver.Builder()
         .forBrowser('phantomjs')
         .build();
     driver.get('http://www.google.com/ncr');
@@ -27,7 +34,7 @@ app.post('/tradeRemi', function (req, res) {
     }, function(error) {
         res.status(200).send(error);
     });
-    driver.quit();
+    driver.quit();*/
 });
 
 app.listen(port, function () {
