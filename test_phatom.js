@@ -13,7 +13,7 @@ var port = process.env.PORT || 14000;
 var By = webdriver.By;
 
 app.post('/tradeRemi', function (req, res) {
-    afterLoad('https://google.com',function(html){
+    afterLoad('https://remitano.com/vn',function(html){
      console.log(html);
          res.json(html);
     });
