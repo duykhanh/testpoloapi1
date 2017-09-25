@@ -16,7 +16,7 @@ const  jsdom = require("node-jsdom");
 var request = require('request');
 var phantom = require('x-ray-phantom');
 var Xray = require('x-ray');
-
+var  afterLoad = require("after-load");
 var x = Xray()
   .driver(phantom({webSecurity:false}));
 
@@ -58,26 +58,9 @@ var test="retretgre";
 
 app.post('/tradeRemi', function (req, res) {
 	
- 	x('https://eth.remitano.com/vn', 'div.price-content')(function(err, str) {
-	  if (err){
-	  	console.log("Got an error: ", err);	
-	  } 
-	 console.log("KHanh ", str);	
-          console.log("Got an error: ", str);	
-	  test=str;		
-	  
-	});
-		
-	/*new YQL.exec('select * from data.html.cssselect where url="https://eth.remitano.com/vn" and css=".main-container"', function(response) {
-	 
-		//This will return undefined! The scraping was unsuccessful!
-		console.log(response.results);
-	 	
-	});*/
-	
-	 console.log("Got an error: ", test);
-	
-   	res.json("done");
+ 	afterLoad('https://google.com',function(html){
+     		console.log(html);
+ 	})
 });
 
 var port = 3000;
