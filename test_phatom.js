@@ -16,7 +16,7 @@ app.post('/tradeRemi', function (req, res) {
     afterLoad('https://remitano.com/vn',function(html){
         var pos = html.lastIndexOf("VND");
         console.log("Khanh Nguyen",pos);
-        var subString = html.substring( pos-100,pos);
+        var subString = html.substring( pos-101,pos+4);
         console.log(subString);
          res.json(subString);
     });
