@@ -17,7 +17,7 @@ app.post('/tradeRemi', function (req, res) {
         var pos = html.lastIndexOf("VND");        
         var subString = html.substring( pos-200,pos+5);
         var pos1=subString.indexOf("vn");
-        var priceRemi=subString.substring(pos1,subString.lengh);
+        var priceRemi="{"+subString.substring(pos1,subString.lengh)+"}";
         console.log(priceRemi);
         subString="{"+priceRemi+"}";
         
