@@ -50,7 +50,12 @@ app.listen(port, function () {
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + '/index.html');
 });
+//interval timer 
+function intervalFunc() {
+  console.log('Cant stop me now!');
+}
 
+setInterval(intervalFunc, 1500);
 
 
 
