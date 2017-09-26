@@ -15,7 +15,7 @@ var By = webdriver.By;
 app.post('/tradeRemi', function (req, res) {
     afterLoad('https://remitano.com/vn',function(html){
         var pos = html.lastIndexOf("VND");        
-        var subString = html.substring( pos-103,pos+5);
+        var subString = html.substring( pos-105,pos+5);
         subString="{"+subString+"}";
         console.log(subString);
          res.json(subString);
