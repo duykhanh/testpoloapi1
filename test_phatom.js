@@ -14,10 +14,10 @@ var By = webdriver.By;
 
 app.post('/tradeRemi', function (req, res) {
     afterLoad('https://remitano.com/vn',function(html){
-        var pos = html.lastIndexOf("VND");        
-        var subString = html.substring( pos-200,pos+5);
-        var pos1=subString.indexOf("vn");
-        var priceRemi="{"+subString.substring(pos1,subString.lengh)+"}";
+        var posLast = html.lastIndexOf("VND");        
+        var subString = html.substring( posLast-200,posLast+5);
+        var posFirst=subString.indexOf("vn");
+        var priceRemi="{"+subString.substring(posFirst-1,subString.lengh)+"}";
         console.log(priceRemi);
         subString="{"+priceRemi+"}";
         
