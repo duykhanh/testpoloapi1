@@ -15,11 +15,13 @@ var By = webdriver.By;
 app.post('/tradeRemi', function (req, res) {
     afterLoad('https://remitano.com/vn',function(html){
         var pos = html.lastIndexOf("VND");        
-        var subString = html.substring( pos-102,pos+5);
-        console.log(subString);
-        subString="{"+subString+"}";
+        var subString = html.substring( pos-200,pos+5);
+        var pos1=subString.indexOf("vn");
+        var priceRemi=subString.substring(pos1,subString.lengh);
+        console.log(priceRemi);
+        subString="{"+priceRemi+"}";
         
-         res.json(subString);
+         res.json(priceRemi);
     });
    
     /*var driver = new webdriver.Builder()
