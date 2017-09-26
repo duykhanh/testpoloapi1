@@ -4,7 +4,10 @@ var afterLoad = require("after-load");
 
 var http = require('http');
 var https = require('https');
+
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname));
@@ -50,12 +53,22 @@ app.listen(port, function () {
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + '/index.html');
 });
+
 //interval timer 
-function intervalFunc() {
-  console.log('Cant stop me now!');
+function getPriceRemi() {
+  afterLoad('https://remitano.com/vn',function(html){
+        var posLast = html.lastIndexOf("VND");        
+        var subString = html.substring( posLast-200,posLast+5);
+        var posFirst=subString.indexOf("vn");
+        var priceRemi="{"+subString.substring(posFirst-1,subString.lengh)+"}";
+        console.log(priceRemi);
+        subString="{"+priceRemi+"}";
+        io.emit('remiMessages', priceRemi);
+         
+    });
 }
 
-setInterval(intervalFunc, 1500);
+setInterval(intervalFunc, 5000);
 
 
 
