@@ -17,6 +17,7 @@ app.post('/tradeRemi', function (req, res) {
         var pos = html.lastIndexOf("VND");        
         var subString = html.substring( pos-107,pos+5);
         subString="{"+subString+"}";
+        console.log(subString);
          res.json(subString);
     });
    
